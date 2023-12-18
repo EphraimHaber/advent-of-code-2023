@@ -57,8 +57,8 @@ if __name__ == '__main__':
             hand = line.split(" ")[0]
             pot = line.split(" ")[1]
             my_line = f'{hand} {pot}'
-            print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
-            res += ((i + 1) * int(line.split(" ")[1]))
+            print(f'{i+1}: hand: {hand} pot: {pot}')
+            res += ((i + 1) * int(pot))
         print(res)
         exit()
             # if is_hand_five_of_kind(hand):
