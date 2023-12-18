@@ -79,7 +79,16 @@ def four_of_kind_comparator(hand1: str, hand2: str) -> int:
     hand1_card_index = CARDS.index(get_n_of_kind(4, hand1))
     hand2_card_index = CARDS.index(get_n_of_kind(4, hand2))
     if hand1_card_index == hand2_card_index:
-        return 0
+        hand1 = "".join(c for c in hand1 if c != get_n_of_kind(4, hand1))
+        hand2 = "".join(c for c in hand2 if c != get_n_of_kind(4, hand2))
+        assert len(hand1) == 1
+        assert len(hand2) == 1
+        if CARDS_SCORE[hand1] > CARDS_SCORE[hand2]:
+            return 1
+        if CARDS_SCORE[hand1] < CARDS_SCORE[hand2]:
+            return -1
+        if CARDS_SCORE[hand1] == CARDS_SCORE[hand2]:
+            return 0
     if hand1_card_index > hand2_card_index:
         return 1
     return -1
@@ -129,8 +138,15 @@ def two_pairs_comparator(hand1: str, hand2: str) -> int:
     if CARDS_SCORE[hand1_pair_card_1] == CARDS_SCORE[hand2_pair_card_1]:
         if CARDS_SCORE[hand1_pair_card_2] > CARDS_SCORE[hand2_pair_card_1]:
             return 1
-        if CARDS_SCORE[hand1_pair_card_2] == CARDS_SCORE[hand2_pair_card_1]:
-            return 0
+        if CARDS_SCORE[hand1_pair_card_2] == CARDS_SCORE[hand2_pair_card_2]:
+            hand1 = "".join(c for c in hand1 if c not in [hand1_pair_card_1, hand1_pair_card_2])
+            hand2 = "".join(c for c in hand2 if c not in [hand2_pair_card_1, hand2_pair_card_2])
+            if CARDS_SCORE[hand1] > CARDS_SCORE[hand2]:
+                return 1
+            if CARDS_SCORE[hand1] == CARDS_SCORE[hand2]:
+                return 0
+            if CARDS_SCORE[hand1] < CARDS_SCORE[hand2]:
+                return -1
         return -1
     return -1
 
@@ -143,7 +159,10 @@ def pair_comparator(hand1: str, hand2: str) -> int:
     if CARDS_SCORE[hand1_card] > CARDS_SCORE[hand2_card]:
         return 1
     if CARDS_SCORE[hand1_card] == CARDS_SCORE[hand2_card]:
-        return 0
+        hand1 = "".join(c for c in hand1 if c != hand1_card)
+        hand2 = "".join(c for c in hand2 if c != hand2_card)
+        t = high_card_comparator(hand1, hand2)
+        return t
     return -1
 
 
@@ -157,7 +176,7 @@ def high_card_comparator(hand1: str, hand2: str) -> int:
     for i in range(len(hand1)):
         if hand1[i] == hand2[i]:
             continue
-        if CARDS_SCORE[hand1[i]] > CARDS_SCORE[hand1[i]]:
+        if CARDS_SCORE[hand1[i]] > CARDS_SCORE[hand2[i]]:
             decision = 1
             break
         else:
