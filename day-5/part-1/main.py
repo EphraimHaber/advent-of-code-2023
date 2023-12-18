@@ -35,22 +35,22 @@ def main():
                     maps[maps_keys[i]].append(temp_mapping)
         final_destinations = []
         for curr_seed in seeds:
-            # path = f'{curr_seed}'
+            path = f'{curr_seed}'
             for key in maps_keys:
-                # is_found = False
+                is_found = False
                 for map_range in maps[key]:
                     source_start = map_range[1]
                     range_length = map_range[2]
                     dest_start = map_range[0]
                     if curr_seed in range(source_start, source_start + range_length):
-                        # path += f'->{dest_start + curr_seed - source_start}'
+                        path += f'->{dest_start + curr_seed - source_start}'
                         curr_seed = dest_start + curr_seed - source_start
-                        # is_found = True
+                        is_found = True
                         break
-                # if not is_found:
-                    # path += f'->{curr_seed}'
+                if not is_found:
+                    path += f'->{curr_seed}'
 
-            # print(path)
+            print(path)
             final_destinations.append(curr_seed)
     print(min(final_destinations))
 
