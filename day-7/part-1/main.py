@@ -39,65 +39,69 @@ from poker_inner_comparators import (five_of_kind_comparator,
 
 from complete_comparator import card_comparator
 
+fives = []
+fours = []
+full_houses = []
+triples = []
+two_pairs = []
+pairs = []
+high_cards = []
 
 if __name__ == '__main__':
     with (open('puzzle.txt') as file):
         lines = file.read().split('\n')
         lines.sort(key=cmp_to_key(card_comparator))
         res = 0
-        fives = []
-        fours = []
-        full_houses = []
-        triples = []
-        two_pairs = []
-        pairs = []
-        high_cards = []
+
         for i, line in enumerate(lines):
             hand = line.split(" ")[0]
             pot = line.split(" ")[1]
             my_line = f'{hand} {pot}'
             print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
-            if is_hand_five_of_kind(hand):
-                fives.append(my_line)
-            elif is_hand_four_of_kind(hand):
-                fours.append(my_line)
-            elif is_hand_full_house(hand):
-                full_houses.append(my_line)
-            elif is_hand_three_of_kind(hand):
-                triples.append(my_line)
-            elif is_hand_two_pair(hand):
-                two_pairs.append(my_line)
-            elif is_hand_pair(hand):
-                pairs.append(my_line)
-            elif is_hand_high_card(hand):
-                high_cards.append(my_line)
             res += ((i + 1) * int(line.split(" ")[1]))
-        print(fives)
-        print(fours)
-        print(full_houses)
-        print(triples)
-        print(two_pairs)
-        print(pairs)
-        print(high_cards)
-        print(len(fives) + len(fours) + len(full_houses) + len(triples) + len(two_pairs) + len(pairs) + len(high_cards))
         print(res)
-        temp = []
-        temp.extend(high_cards)
-        temp.extend(pairs)
-        temp.extend(two_pairs)
-        temp.extend(triples)
-        temp.extend(full_houses)
-        temp.extend(fours)
-        temp.extend(fives)
-        my_res = 0
-        for i, line in enumerate(temp):
-            hand = line.split(" ")[0]
-            pot = line.split(" ")[1]
-            my_res += i*int(pot) + int(pot)
-            print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
-        print(my_res)
-        assert res == my_res
         exit()
+            # if is_hand_five_of_kind(hand):
+            #     fives.append(my_line)
+            # elif is_hand_four_of_kind(hand):
+            #     fours.append(my_line)
+            # elif is_hand_full_house(hand):
+            #     full_houses.append(my_line)
+            # elif is_hand_three_of_kind(hand):
+            #     triples.append(my_line)
+            # elif is_hand_two_pair(hand):
+            #     two_pairs.append(my_line)
+            # elif is_hand_pair(hand):
+            #     pairs.append(my_line)
+            # elif is_hand_high_card(hand):
+            #     high_cards.append(my_line)
+
+        # print(fives)
+        # print(fours)
+        # print(full_houses)
+        # print(triples)
+        # print(two_pairs)
+        # print(pairs)
+        # print(high_cards)
+        # print(len(fives) + len(fours) + len(full_houses) + len(triples) + len(two_pairs) + len(pairs) + len(high_cards))
+        # print(res)
+        # temp = []
+        # temp.extend(high_cards)
+        # temp.extend(pairs)
+        # temp.extend(two_pairs)
+        # temp.extend(triples)
+        # temp.extend(full_houses)
+        # temp.extend(fours)
+        # temp.extend(fives)
+        # my_res = 0
+        # for i, line in enumerate(temp):
+        #     hand = line.split(" ")[0]
+        #     pot = line.split(" ")[1]
+        #     my_res += i*int(pot) + int(pot)
+        #     print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
+        # print(my_res)
+        # assert res == my_res
+        # exit()
 
 
 
