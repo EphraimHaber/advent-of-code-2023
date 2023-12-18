@@ -37,12 +37,7 @@ from poker_inner_comparators import (five_of_kind_comparator,
                                      high_card_comparator
                                      )
 
-from t import card_comparator
-
-
-def ranges_print_debug():
-    for x in category_ranges:
-        print(x, category_ranges[x])
+from complete_comparator import card_comparator
 
 
 if __name__ == '__main__':
@@ -61,7 +56,7 @@ if __name__ == '__main__':
             hand = line.split(" ")[0]
             pot = line.split(" ")[1]
             my_line = f'{hand} {pot}'
-            # print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
+            print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
             if is_hand_five_of_kind(hand):
                 fives.append(my_line)
             elif is_hand_four_of_kind(hand):
@@ -101,7 +96,7 @@ if __name__ == '__main__':
             my_res += i*int(pot) + int(pot)
             print(f'{i+1}: hand: {line.split(" ")[0]} pot: {line.split(" ")[1]}')
         print(my_res)
-        print(res == my_res)  # True. wtf
+        assert res == my_res
         exit()
 
 
