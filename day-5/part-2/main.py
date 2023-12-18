@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 
 
-chance_of_event = 1 / (100000*12)
+chance_of_event = 1 / 10000
 
 
 def get_seeds(seed_line: str) -> list[int]:
